@@ -1,0 +1,46 @@
+name: Nightly pipeline
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"  # daily 06:00 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if (Test-Path requirements.txt) { python -m pip install -r requirements.txt } else { python -m pip install duckdb pandas pyarrow }
+        shell: pwsh
+
+      - name: Run pipeline
+        run: |
+          python -m src.ingest.load_kaggle_raw
+          python -m src.transform.build_marts
+          python -m src.validate.run_checks
+          python -m src.publish.build_report
+        shell: pwsh
+
+      - name: Commit updated report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html outputs/reports/dq_results.json requirements.txt
+          git diff --staged --quiet; if ($LASTEXITCODE -eq 0) { echo "No changes to commit"; exit 0 }
+          git commit -m "chore: update DQ report"
+          git push
+        shell: pwsh
