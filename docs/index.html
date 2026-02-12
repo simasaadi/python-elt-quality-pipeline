@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Retail Star Schema ELT - Data Quality Report</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
+    h1 { margin: 0 0 8px; }
+    .meta { color: #555; margin-bottom: 18px; }
+    .cards { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0 18px; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 12px 14px; min-width: 160px; }
+    .k { color: #666; font-size: 12px; margin-bottom: 6px; }
+    .v { font-size: 22px; font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #e5e5e5; padding: 10px; vertical-align: top; }
+    th { background: #f7f7f7; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Retail Star Schema ELT - Data Quality Report</h1>
+  <div class="meta">
+    Run UTC: 2026-02-12T03:35:44+00:00<br/>
+    DB: C:\Users\USER\Documents\GitHub\python-elt-quality-pipeline\data\processed\retail_star_schema.duckdb
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="k">Total checks</div><div class="v">13</div></div>
+    <div class="card"><div class="k">Passed</div><div class="v">13</div></div>
+    <div class="card"><div class="k">Failed</div><div class="v">0</div></div>
+    <div class="card"><div class="k">Generated</div><div class="v">2026-02-12</div></div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Check</th>
+        <th>Status</th>
+        <th>Failed rows</th>
+        <th>Threshold</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+            <tr>
+              <td>mart.dim_customers__rowcount_floor</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>dim_customers should have at least 1 row</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__rowcount_floor</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>fct_sales should have at least 1 row</td>
+            </tr>
+            
+            <tr>
+              <td>mart.dim_customers__customer_id__not_null</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>customer_id should never be NULL</td>
+            </tr>
+            
+            <tr>
+              <td>mart.dim_products__product_id__not_null</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>product_id should never be NULL</td>
+            </tr>
+            
+            <tr>
+              <td>mart.dim_stores__store_id__not_null</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>store_id should never be NULL</td>
+            </tr>
+            
+            <tr>
+              <td>mart.dim_salespersons__salesperson_id__not_null</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>salesperson_id should never be NULL</td>
+            </tr>
+            
+            <tr>
+              <td>mart.dim_campaigns__campaign_id__not_null</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>campaign_id should never be NULL</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__sales_id__not_null</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>sales_id should never be NULL</td>
+            </tr>
+            
+            <tr>
+              <td>mart.dim_customers__customer_id__unique</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>customer_id should be unique in dim_customers</td>
+            </tr>
+            
+            <tr>
+              <td>mart.dim_products__product_id__unique</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>product_id should be unique in dim_products</td>
+            </tr>
+            
+            <tr>
+              <td>mart.dim_stores__store_id__unique</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>store_id should be unique in dim_stores</td>
+            </tr>
+            
+            <tr>
+              <td>mart.dim_salespersons__salesperson_id__unique</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>salesperson_id should be unique in dim_salespersons</td>
+            </tr>
+            
+            <tr>
+              <td>mart.dim_campaigns__campaign_id__unique</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>campaign_id should be unique in dim_campaigns</td>
+            </tr>
+            
+    </tbody>
+  </table>
+</body>
+</html>
