@@ -3,44 +3,66 @@ name: Nightly pipeline
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 6 * * *"  # daily 06:00 UTC
+    - cron: "0 6 * * *" # daily 06:00 UTC
+  push:
+    branches: ["main"]
 
 permissions:
   contents: write
 
+concurrency:
+  group: nightly-pipeline
+  cancel-in-progress: true
+
 jobs:
   run:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: "pip"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if (Test-Path requirements.txt) { python -m pip install -r requirements.txt } else { python -m pip install duckdb pandas pyarrow }
-        shell: pwsh
+          python -m pip install -r requirements.txt
 
       - name: Run pipeline
         run: |
           python -m src.ingest.load_kaggle_raw
           python -m src.transform.build_marts
+          python -m src.transform.build_analytics_marts
           python -m src.validate.run_checks
           python -m src.publish.build_report
-        shell: pwsh
 
-      - name: Commit updated report
+      # Keep outputs/ ignored, but still keep the JSON available from the run
+      - name: Upload DQ JSON artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dq-results
+          path: outputs/reports/dq_results.json
+          if-no-files-found: warn
+
+      # Only commit the GitHub Pages report
+      - name: Commit updated report (docs/index.html)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/index.html outputs/reports/dq_results.json requirements.txt
-          git diff --staged --quiet; if ($LASTEXITCODE -eq 0) { echo "No changes to commit"; exit 0 }
-          git commit -m "chore: update DQ report"
+
+          git add docs/index.html
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "chore: update report"
           git push
-        shell: pwsh
