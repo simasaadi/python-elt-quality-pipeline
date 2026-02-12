@@ -26,6 +26,7 @@ src/                   pipeline code (ELT + marts)
 tools/                 utilities (build dashboard, generate viz)
 run_all.ps1            Windows end-to-end runner
 requirements.txt       Python deps
+
 How it works
 1) ELT → DuckDB star schema
 
