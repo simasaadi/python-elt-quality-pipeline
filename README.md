@@ -6,7 +6,8 @@
 
 
 
-\[!\[Open interactive dashboard](https://img.shields.io/badge/Open%20DQ%20Dashboard-Click%20here-blue)](https://simasaadi.github.io/python-elt-quality-pipeline/dq\_dashboard.html)
+[![Open DQ Dashboard](https://img.shields.io/badge/Open%20DQ%20Dashboard-Click%20here-blue)](https://simasaadi.github.io/python-elt-quality-pipeline/dq_dashboard.html)
+
 
 
 
