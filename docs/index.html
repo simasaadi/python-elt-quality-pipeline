@@ -20,13 +20,13 @@
 <body>
   <h1>Retail Star Schema ELT - Data Quality Report</h1>
   <div class="meta">
-    Run UTC: 2026-02-12T03:35:44+00:00<br/>
+    Run UTC: 2026-02-12T04:17:17+00:00<br/>
     DB: C:\Users\USER\Documents\GitHub\python-elt-quality-pipeline\data\processed\retail_star_schema.duckdb
   </div>
 
   <div class="cards">
-    <div class="card"><div class="k">Total checks</div><div class="v">13</div></div>
-    <div class="card"><div class="k">Passed</div><div class="v">13</div></div>
+    <div class="card"><div class="k">Total checks</div><div class="v">21</div></div>
+    <div class="card"><div class="k">Passed</div><div class="v">21</div></div>
     <div class="card"><div class="k">Failed</div><div class="v">0</div></div>
     <div class="card"><div class="k">Generated</div><div class="v">2026-02-12</div></div>
   </div>
@@ -60,46 +60,6 @@
             </tr>
             
             <tr>
-              <td>mart.dim_customers__customer_id__not_null</td>
-              <td><strong>PASS</strong></td>
-              <td style="text-align:right;">0</td>
-              <td style="text-align:right;">0</td>
-              <td>customer_id should never be NULL</td>
-            </tr>
-            
-            <tr>
-              <td>mart.dim_products__product_id__not_null</td>
-              <td><strong>PASS</strong></td>
-              <td style="text-align:right;">0</td>
-              <td style="text-align:right;">0</td>
-              <td>product_id should never be NULL</td>
-            </tr>
-            
-            <tr>
-              <td>mart.dim_stores__store_id__not_null</td>
-              <td><strong>PASS</strong></td>
-              <td style="text-align:right;">0</td>
-              <td style="text-align:right;">0</td>
-              <td>store_id should never be NULL</td>
-            </tr>
-            
-            <tr>
-              <td>mart.dim_salespersons__salesperson_id__not_null</td>
-              <td><strong>PASS</strong></td>
-              <td style="text-align:right;">0</td>
-              <td style="text-align:right;">0</td>
-              <td>salesperson_id should never be NULL</td>
-            </tr>
-            
-            <tr>
-              <td>mart.dim_campaigns__campaign_id__not_null</td>
-              <td><strong>PASS</strong></td>
-              <td style="text-align:right;">0</td>
-              <td style="text-align:right;">0</td>
-              <td>campaign_id should never be NULL</td>
-            </tr>
-            
-            <tr>
               <td>mart.fct_sales__sales_id__not_null</td>
               <td><strong>PASS</strong></td>
               <td style="text-align:right;">0</td>
@@ -108,43 +68,147 @@
             </tr>
             
             <tr>
-              <td>mart.dim_customers__customer_id__unique</td>
+              <td>mart.fct_sales__sales_date__not_null</td>
               <td><strong>PASS</strong></td>
               <td style="text-align:right;">0</td>
               <td style="text-align:right;">0</td>
-              <td>customer_id should be unique in dim_customers</td>
+              <td>sales_date should never be NULL</td>
             </tr>
             
             <tr>
-              <td>mart.dim_products__product_id__unique</td>
+              <td>mart.fct_sales__customer_sk__not_null</td>
               <td><strong>PASS</strong></td>
               <td style="text-align:right;">0</td>
               <td style="text-align:right;">0</td>
-              <td>product_id should be unique in dim_products</td>
+              <td>customer_sk should never be NULL</td>
             </tr>
             
             <tr>
-              <td>mart.dim_stores__store_id__unique</td>
+              <td>mart.fct_sales__product_sk__not_null</td>
               <td><strong>PASS</strong></td>
               <td style="text-align:right;">0</td>
               <td style="text-align:right;">0</td>
-              <td>store_id should be unique in dim_stores</td>
+              <td>product_sk should never be NULL</td>
             </tr>
             
             <tr>
-              <td>mart.dim_salespersons__salesperson_id__unique</td>
+              <td>mart.fct_sales__store_sk__not_null</td>
               <td><strong>PASS</strong></td>
               <td style="text-align:right;">0</td>
               <td style="text-align:right;">0</td>
-              <td>salesperson_id should be unique in dim_salespersons</td>
+              <td>store_sk should never be NULL</td>
             </tr>
             
             <tr>
-              <td>mart.dim_campaigns__campaign_id__unique</td>
+              <td>mart.fct_sales__salesperson_sk__not_null</td>
               <td><strong>PASS</strong></td>
               <td style="text-align:right;">0</td>
               <td style="text-align:right;">0</td>
-              <td>campaign_id should be unique in dim_campaigns</td>
+              <td>salesperson_sk should never be NULL</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__total_amount__not_null</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>total_amount should never be NULL</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__sales_id__unique</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>sales_id should be unique in fct_sales</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__customer_sk_fk__references_dim_customers.customer_sk</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>All customer_sk values in fct_sales should exist in dim_customers.customer_sk</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__product_sk_fk__references_dim_products.product_sk</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>All product_sk values in fct_sales should exist in dim_products.product_sk</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__store_sk_fk__references_dim_stores.store_sk</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>All store_sk values in fct_sales should exist in dim_stores.store_sk</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__salesperson_sk_fk__references_dim_salespersons.salesperson_sk</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>All salesperson_sk values in fct_sales should exist in dim_salespersons.salesperson_sk</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__campaign_sk_fk__references_dim_campaigns.campaign_sk</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>All campaign_sk values in fct_sales should exist in dim_campaigns.campaign_sk</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__total_amount__non_negative</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>total_amount should be >= 0</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__sales_date__not_future</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>sales_date should not be in the future (beyond 1 day)</td>
+            </tr>
+            
+            <tr>
+              <td>mart.fct_sales__total_amount__not_absurd</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>total_amount should not exceed 1,000,000 (sanity check)</td>
+            </tr>
+            
+            <tr>
+              <td>analytics.mart_store_daily__rowcount_floor</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>mart_store_daily should have at least 1 row</td>
+            </tr>
+            
+            <tr>
+              <td>analytics.mart_store_daily__revenue__non_negative</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>revenue should be >= 0</td>
+            </tr>
+            
+            <tr>
+              <td>analytics.mart_campaign_perf__campaign_name__not_null</td>
+              <td><strong>PASS</strong></td>
+              <td style="text-align:right;">0</td>
+              <td style="text-align:right;">0</td>
+              <td>campaign_name should not be NULL (dim join should resolve)</td>
             </tr>
             
     </tbody>

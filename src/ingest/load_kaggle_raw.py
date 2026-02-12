@@ -8,7 +8,10 @@ import duckdb
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-RAW_DIR = REPO_ROOT / "data" / "raw" / "retail-star-schema-elt"
+RAW_DIR = (REPO_ROOT / "data" / "raw" / "retail-star-schema-elt")
+if not RAW_DIR.exists():
+    RAW_DIR = REPO_ROOT / "data" / "sample" / "retail-star-schema-elt"
+
 DB_PATH = REPO_ROOT / "data" / "processed" / "retail_star_schema.duckdb"
 REPORT_PATH = REPO_ROOT / "outputs" / "reports" / "ingest_summary.json"
 
