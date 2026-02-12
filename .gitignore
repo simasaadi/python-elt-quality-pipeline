@@ -205,3 +205,12 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# Local data + outputs
+data/raw/**
+data/processed/**
+outputs/**
+!**/.gitkeep
+*.duckdb
+
